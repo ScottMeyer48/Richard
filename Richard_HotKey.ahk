@@ -10,93 +10,90 @@ SetTimer,SCRIPT_SET_TIMER,300
 Menu, Tray, Icon, d:\CENTER\DOCUMENTS de Scott\PROGRAMMATION\AHK\PERSO\Ressource\Images\IconeVert.ico
 
 SCRIPT_SET_TIMER:
-{
-; FERME LA FENETRE D'AVERTISSEMENT DE WINDOWS 
-IfWinExist,Fichier ouvert - Avertissement de sécurité                           
-{
-  WinActivate ,Fichier ouvert - Avertissement de sécurité
-  Send,!e
-}
-;ControlClick ,&Exécuter,Fichier ouvert - Avertissement de sécurité,, LEFT,1
-;~ ControlClick ,&Oui,,Il est possible que cette page possède un défaut de sécurité non spécifié. Souhaitez-vous continuer ?, LEFT,1
-;~ WinClose, Notifier de Avira Free Antivirus
-return
+
+{	; FERME LA FENETRE D'AVERTISSEMENT DE WINDOWS
+	 
+	IfWinExist,Fichier ouvert - Avertissement de sÃ©curitÃ©                           
+	{
+	WinActivate ,Fichier ouvert - Avertissement de sÃ©curitÃ©
+	Send,!e
+	}
+	;ControlClick ,&ExÃ©cuter,Fichier ouvert - Avertissement de sÃ©curitÃ©,, LEFT,1
+	;~ ControlClick ,&Oui,,Il est possible que cette page possÃ¨de un dÃ©faut de sÃ©curitÃ© non spÃ©cifiÃ©. Souhaitez-vous continuer ?, LEFT,1
+	;~ WinClose, Notifier de Avira Free Antivirus
+	return
 }
 
-;~  IMAGE SUIVANTE / PRECEDANTE AVEC LA ROULETTRE SUR LE VISIONNER D'IMAGE DE WINDOWS
-{
-#IfWinActive, Visionneuse de photos Windows		
-WheelUp::LEFT
-WheelDown::RIGHT
-^WheelUp::NumPadAdd
-^WheelDown::NumPadSub 
-#IfWinActive
-return
+{	;~  IMAGE SUIVANTE / PRECEDANTE AVEC LA ROULETTRE SUR LE VISIONNER D'IMAGE DE WINDOWS
+	#IfWinActive, Visionneuse de photos Windows		
+	WheelUp::LEFT
+	WheelDown::RIGHT
+	^WheelUp::NumPadAdd
+	^WheelDown::NumPadSub 
+	#IfWinActive
+	return
 }
 
-;~ SciTE4AutoHotkey EMPECHER [CTRL + W] (qui fermer l'onglet en cours)
-{
-#IfWinActive, ahk_class SciTEWindow		
-^w::
-#IfWinActive
-return
-}
-;~ INKSCAPE EMPECHER DE ZOOMER AVEC + ET -
-{
-#IfWinActive, ahk_class gdkWindowToplevel		
-NumpadAdd::+
-NumpadSub::-
-#IfWinActive
-return
+{	;~ SciTE4AutoHotkey EMPECHER [CTRL + W] (qui fermer l'onglet en cours)
+	#IfWinActive, ahk_class SciTEWindow		
+	^w::
+	#IfWinActive
+	return
 }
 
-;~ LANCER EXEGO AVEC LE BOUTON "SUIVANT" DE LA SOURIS
-;~ {
-;~ XButton2::                                       
-;~ send, #w
-;~ return
-;~ }
-
-{
-+!^XButton1::
-ToolTip, 2 sec
-run,%Lien%
-;~ run, "\\192.168.100.201\sys\Q-dir portable\Q-Dir.exe"
-Sleep, 2000
-ToolTip
-Return
+{	;~ INKSCAPE EMPECHER DE ZOOMER AVEC + ET -
+	#IfWinActive, ahk_class gdkWindowToplevel		
+	NumpadAdd::+
+	NumpadSub::-
+	#IfWinActive
+	return
 }
 
-;~ INSERER LIEN UPLOAD
-{
-^²::
-Send http://atelierludique.free.fr/000/UPLOAD/
-return
+{	; NON UTILISE
+	;~ LANCER EXEGO AVEC LE BOUTON "SUIVANT" DE LA SOURIS
+	;~ {
+	;~ XButton2::                                       
+	;~ send, #w
+	;~ return
+	;~ }
 }
 
-; FERMER TELECHARGEMENT CHROME
-{
-^<::     
-MouseGetPos, XXX, YYY
-MouseClick, Left , 1903 , 1007
-MouseMove, %XXX%, %YYY%w
-return
+{	; Perso
+	+!^XButton1::
+	ToolTip, 2 sec
+	run,%Lien%
+	;~ run, "\\192.168.100.201\sys\Q-dir portable\Q-Dir.exe"
+	Sleep, 2000
+	ToolTip
+	Return
 }
 
-; Q-Dir
-{
-²::     
-IfWinExist, Q-Dir
-{
-	IfWinActive , Q-Dir
-		WinMinimize , Q-Dir
+{	;~ INSERER LIEN UPLOAD
+	^Â²::
+	Send http://atelierludique.free.fr/000/UPLOAD/
+	return
+}
+
+{	; FERMER TELECHARGEMENT CHROME
+	^<::     
+	MouseGetPos, XXX, YYY
+	MouseClick, Left , 1903 , 1007
+	MouseMove, %XXX%, %YYY%w
+	return
+}
+
+{	; Q-Dir
+	Â²::     
+	IfWinExist, Q-Dir
+	{
+		IfWinActive , Q-Dir
+			WinMinimize , Q-Dir
+		Else
+			WinActivate , Q-Dir
+	}
 	Else
-		WinActivate , Q-Dir
-}
-Else
-	Run, E:\PORTABLE\UTILS\Q-Dir_portable_6_71\Q-Dir.exe
-Return	
+		Run, E:\PORTABLE\UTILS\Q-Dir_portable_6_71\Q-Dir.exe
+	Return	
 }
 
 ^+F12::Reload
-
